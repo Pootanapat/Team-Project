@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="th" class="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>สุดยอดสมองน้อย - Little Brainiac</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&family=Noto+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#0df259", // Neon Green
+              "primary-dark": "#0be050",
+              "background-light": "#f5f8f6",
+              "background-dark": "#102216",
+              "surface-dark": "#1b271f",
+              "surface-light": "#ffffff",
+              "card-dark": "#1b271f",
+              "card-hover": "#233329",
+              "border-dark": "#28392e",
+              "gold-main": "#FFD700",
+              "gold-light": "#FFF7D6",
+            },
+            fontFamily: {
+              display: ["Spline Sans", "Noto Sans Thai", "sans-serif"],
+              body: ["Spline Sans", "Noto Sans Thai", "sans-serif"],
+              mono: ["ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "Consolas", "monospace"],
+            },
+            animation: {
+              'float': 'float 3s ease-in-out infinite',
+              'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+              'spin-slow': 'spin 8s linear infinite',
+            },
+            keyframes: {
+              float: {
+                '0%, 100%': { transform: 'translateY(0)' },
+                '50%': { transform: 'translateY(-10px)' },
+              }
+            }
+          },
+        },
+      }
+    </script>
+    <style>
+      body {
+        font-family: "Spline Sans", "Noto Sans Thai", sans-serif;
+      }
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #111813; 
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #28392e; 
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #3b5443; 
+      }
+      .glass-panel {
+        background: rgba(26, 12, 12, 0.6);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+    </style>
+
+<link rel="stylesheet" href="/index.css">
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.2.4/",
+    "react": "https://esm.sh/react@^19.2.4",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/"
+  }
+}
+</script>
+  <script type="module" crossorigin src="/Program Files/Git/Project-N/little-web/assets/index-BCETAxhA.js"></script>
+</head>
+  <body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white min-h-screen selection:bg-primary selection:text-black overflow-x-hidden">
+    <div id="root"></div>
+</body>
+</html>
