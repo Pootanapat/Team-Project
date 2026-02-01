@@ -49,11 +49,11 @@ Release จะถูกสร้างเป็น tag และแนบไฟ�
 
 **Brain Booster: Zoo Adventure**
 
-![Brain Booster screenshot](docs/images/brain-web-screenshot.svg)
+![Brain Booster screenshot](docs/images/brain-web-screenshot.png)
 
 **Little Brainiac: Hidden Object Zoo**
 
-![Little Brainiac screenshot](docs/images/little-web-screenshot.svg)
+![Little Brainiac screenshot](docs/images/little-web-screenshot.png)
 
 ---
 
