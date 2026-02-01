@@ -21,6 +21,4 @@ Release: v1.0.0
    - https://pootanapat.github.io/Project-N/little-web/
 2. หรือดาวน์โหลดไฟล์ release (zip) แล้วรันบนเครื่อง
 
-หมายเหตุ:
-- ระบบ CI จะ build และ deploy อัตโนมัติเมื่อมีการ push ไปยัง `main` (ใช้ GitHub Actions)
-- หากต้องการให้ผมสร้าง Release และอัปโหลดไฟล์ zip ไปยังหน้า Releases ผมสามารถเตรียมไฟล์ให้และอัปโหลดให้ได้ (การอัปโหลดผ่าน API อาจต้องใช้ Personal Access Token)
+---
