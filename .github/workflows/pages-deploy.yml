@@ -10,6 +10,10 @@ permissions:
   pages: write
   id-token: write
 
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -19,7 +23,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
 
       - name: Install and build little-web
         working-directory: ./little-web
@@ -33,21 +37,114 @@ jobs:
           npm ci
           npm run build
 
-      - name: Copy builds to public folder
+      - name: Prepare public folder structure
         run: |
           rm -rf public || true
           mkdir -p public/little-web public/brain-web
+          
+          # Copy built files (PWA files are already included via Vite publicDir)
           cp -r little-web/dist/* public/little-web/
           cp -r brain-web/dist/* public/brain-web/
 
+      - name: Create landing page
+        run: |
+          cat > public/index.html << 'EOF'
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Project-N Learning</title>
+            <style>
+              * { margin: 0; padding: 0; box-sizing: border-box; }
+              body {
+                font-family: 'Segoe UI', system-ui, sans-serif;
+                background: linear-gradient(135deg, #102216 0%, #1a2c20 100%);
+                min-height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 20px;
+              }
+              .container {
+                text-align: center;
+                max-width: 800px;
+              }
+              h1 {
+                color: #0df259;
+                font-size: 2.5rem;
+                margin-bottom: 1rem;
+              }
+              p {
+                color: #a0a0a0;
+                margin-bottom: 2rem;
+              }
+              .cards {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 20px;
+              }
+              .card {
+                background: rgba(255,255,255,0.05);
+                border: 1px solid rgba(255,255,255,0.1);
+                border-radius: 16px;
+                padding: 30px;
+                text-decoration: none;
+                transition: all 0.3s ease;
+              }
+              .card:hover {
+                background: rgba(13, 242, 89, 0.1);
+                border-color: #0df259;
+                transform: translateY(-5px);
+              }
+              .card h2 {
+                color: #fff;
+                margin-bottom: 10px;
+              }
+              .card p {
+                color: #888;
+                margin-bottom: 0;
+                font-size: 0.9rem;
+              }
+              .emoji {
+                font-size: 3rem;
+                margin-bottom: 15px;
+              }
+            </style>
+          </head>
+          <body>
+            <div class="container">
+              <h1>🧠 Project-N Learning</h1>
+              <p>เลือกแอพที่ต้องการเล่น</p>
+              <div class="cards">
+                <a href="./brain-web/" class="card">
+                  <div class="emoji">🦁</div>
+                  <h2>Brain Booster</h2>
+                  <p>Zoo Adventure - ฝึกสมองด้วยการหาสัตว์</p>
+                </a>
+                <a href="./little-web/" class="card">
+                  <div class="emoji">🧒</div>
+                  <h2>Little Brainiac</h2>
+                  <p>สุดยอดสมองน้อย - เกมฝึกสมองสำหรับเด็ก</p>
+                </a>
+              </div>
+            </div>
+          </body>
+          </html>
+          EOF
+
       - name: Upload artifact for Pages
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v3
         with:
           path: public
 
   deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: build
     steps:
       - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v1
+        id: deployment
+        uses: actions/deploy-pages@v4
